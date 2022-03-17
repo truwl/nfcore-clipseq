@@ -1,0 +1,388 @@
+parameter_meta:
+  clipseq.samplesheet:
+    description: Input FastQ files.
+    group: input_output_options
+    help: 'Use this to specify the location of your input FastQ files. For example:
+
+
+      ```bash
+
+      --input ''path/to/data/sample_*_{1,2}.fastq''
+
+      ```
+
+
+      Please note the following requirements:
+
+
+      1. The path must be enclosed in quotes
+
+      2. The path must have at least one `*` wildcard character
+
+      3. When using the pipeline with paired end data, the path must use `{1,2}` notation
+      to specify read pairs.
+
+
+      If left unspecified, a default pattern is used: `data/*{1,2}.fastq.gz`'
+    hidden: false
+  clipseq.outdir:
+    description: The output directory where the results will be saved.
+    group: input_output_options
+    help: ''
+    hidden: false
+  clipseq.email:
+    description: Email address for completion summary.
+    group: input_output_options
+    help: Set this parameter to your e-mail address to get a summary e-mail with details
+      of the run sent to you when the workflow exits. If set in your user config file
+      (`~/.nextflow/config`) then you don't need to specify this on the command line
+      for every run.
+    hidden: false
+  clipseq.genome:
+    description: Name of iGenomes reference.
+    group: reference_genome_options
+    help: 'If using a reference genome configured in the pipeline using iGenomes,
+      use this parameter to give the ID for the reference. This is then used to build
+      the full paths for all required reference genome files e.g. `--genome GRCh38`.
+
+
+      See the [nf-core website docs](https://nf-co.re/usage/reference_genomes) for
+      more details.'
+    hidden: false
+  clipseq.smrna_org:
+    description: Organism for small RNA reference.
+    group: reference_genome_options
+    help: ''
+    hidden: false
+  clipseq.smrna_fasta:
+    description: Path to small RNA FASTA file
+    group: reference_genome_options
+    help: ''
+    hidden: false
+  clipseq.fasta:
+    description: Path to genome FASTA file.
+    group: reference_genome_options
+    help: If you have no genome reference available, the pipeline can build one using
+      a FASTA file. This requires additional time and resources, so it's better to
+      use a pre-build index if possible.
+    hidden: false
+  clipseq.fai:
+    description: Path to genome FASTA index file
+    group: reference_genome_options
+    help: ''
+    hidden: false
+  clipseq.gtf:
+    description: Path to GTF annotation file
+    group: reference_genome_options
+    help: ''
+    hidden: false
+  clipseq.star_index:
+    description: Path to genome STAR index
+    group: reference_genome_options
+    help: ''
+    hidden: false
+  clipseq.save_index:
+    description: Save STAR index if generated within pipeline.
+    group: reference_genome_options
+    help: ''
+    hidden: false
+  clipseq.igenomes_base:
+    description: Directory / URL base for iGenomes references.
+    group: reference_genome_options
+    help: ''
+    hidden: true
+  clipseq.igenomes_ignore:
+    description: Do not load the iGenomes reference config.
+    group: reference_genome_options
+    help: Do not load `igenomes.config` when running the pipeline. You may choose
+      this option if you observe clashes between custom parameters and those supplied
+      in `igenomes.config`.
+    hidden: true
+  clipseq.adapter:
+    description: Sequencing adapter for trimming
+    group: adapter_and_umi_options
+    help: ''
+    hidden: false
+  clipseq.move_umi:
+    description: UMI format to move to FastQ header (optional)
+    group: adapter_and_umi_options
+    help: ''
+    hidden: false
+  clipseq.deduplicate:
+    description: Deduplicate using UMIs
+    group: adapter_and_umi_options
+    help: ''
+    hidden: false
+  clipseq.umi_separator:
+    description: UMI separator in the FastQ read name
+    group: adapter_and_umi_options
+    help: ''
+    hidden: false
+  clipseq.peakcaller:
+    description: Which peakcaller(s) to use
+    group: peak_calling_options
+    help: ''
+    hidden: false
+  clipseq.segment:
+    description: Path to iCount segment file
+    group: peak_calling_options
+    help: ''
+    hidden: false
+  clipseq.half_window:
+    description: iCount half-window setting
+    group: peak_calling_options
+    help: ''
+    hidden: false
+  clipseq.merge_window:
+    description: iCount merge-window setting
+    group: peak_calling_options
+    help: ''
+    hidden: false
+  clipseq.min_value:
+    description: Paraclu minimum cluster count
+    group: peak_calling_options
+    help: ''
+    hidden: false
+  clipseq.min_density_increase:
+    description: Paraclu minimum density increase
+    group: peak_calling_options
+    help: ''
+    hidden: false
+  clipseq.max_cluster_length:
+    description: Paraclu maximum cluster length
+    group: peak_calling_options
+    help: ''
+    hidden: false
+  clipseq.pureclip_bc:
+    description: PureCLIP binding characteristics of protein
+    group: peak_calling_options
+    help: ''
+    hidden: false
+  clipseq.pureclip_dm:
+    description: PureCLIP merge distance
+    group: peak_calling_options
+    help: ''
+    hidden: false
+  clipseq.pureclip_iv:
+    description: PureCLIP chromosomes for HMM training
+    group: peak_calling_options
+    help: ''
+    hidden: false
+  clipseq.bin_size_both:
+    description: Piranha bin size
+    group: peak_calling_options
+    help: ''
+    hidden: false
+  clipseq.cluster_dist:
+    description: Piranha clustering distance
+    group: peak_calling_options
+    help: ''
+    hidden: false
+  clipseq.motif:
+    description: Perform motif finding
+    group: motif_finding
+    help: ''
+    hidden: false
+  clipseq.motif_sample:
+    description: Sample n peaks for motif finding
+    group: motif_finding
+    help: ''
+    hidden: false
+  clipseq.help:
+    description: Display help text.
+    group: generic_options
+    help: ''
+    hidden: true
+  clipseq.publish_dir_mode:
+    description: Method used to save pipeline results to output directory.
+    group: generic_options
+    help: The Nextflow `publishDir` option specifies which intermediate files should
+      be saved to the output directory. This option tells the pipeline what method
+      should be used to move these files. See [Nextflow docs](https://www.nextflow.io/docs/latest/process.html#publishdir)
+      for details.
+    hidden: true
+  clipseq.validate_params:
+    description: Boolean whether to validate parameters against the schema at runtime
+    group: generic_options
+    help: ''
+    hidden: true
+  clipseq.email_on_fail:
+    description: Email address for completion summary, only when pipeline fails.
+    group: generic_options
+    help: This works exactly as with `--email`, except emails are only sent if the
+      workflow is not successful.
+    hidden: true
+  clipseq.plaintext_email:
+    description: Send plain-text email instead of HTML.
+    group: generic_options
+    help: Set to receive plain-text e-mails instead of HTML formatted.
+    hidden: true
+  clipseq.max_multiqc_email_size:
+    description: File size limit when attaching MultiQC reports to summary emails.
+    group: generic_options
+    help: If file generated by pipeline exceeds the threshold, it will not be attached.
+    hidden: true
+  clipseq.monochrome_logs:
+    description: Do not use coloured log outputs.
+    group: generic_options
+    help: Set to disable colourful command line output and live life in monochrome.
+    hidden: true
+  clipseq.multiqc_config:
+    description: Custom config file to supply to MultiQC.
+    group: generic_options
+    help: ''
+    hidden: true
+  clipseq.tracedir:
+    description: Directory to keep pipeline Nextflow logs and reports.
+    group: generic_options
+    help: ''
+    hidden: true
+  clipseq.show_hidden_params:
+    description: Show all params when using `--help`
+    group: generic_options
+    help: By default, parameters set as _hidden_ in the schema are not shown on the
+      command line when a user runs with `--help`. Specifying this option will tell
+      the pipeline to show all parameters.
+    hidden: true
+  clipseq.max_cpus:
+    description: Maximum number of CPUs that can be requested    for any single job.
+    group: max_job_request_options
+    help: Use to set an upper-limit for the CPU requirement for each process. Should
+      be an integer e.g. `--max_cpus 1`
+    hidden: true
+  clipseq.max_memory:
+    description: Maximum amount of memory that can be requested for any single job.
+    group: max_job_request_options
+    help: Use to set an upper-limit for the memory requirement for each process. Should
+      be a string in the format integer-unit e.g. `--max_memory '8.GB'`
+    hidden: true
+  clipseq.max_time:
+    description: Maximum amount of time that can be requested for any single job.
+    group: max_job_request_options
+    help: Use to set an upper-limit for the time requirement for each process. Should
+      be a string in the format integer-unit e.g. `--max_time '2.h'`
+    hidden: true
+  clipseq.custom_config_version:
+    description: Git commit id for Institutional configs.
+    group: institutional_config_options
+    help: 'Provide git commit id for custom Institutional configs hosted at `nf-core/configs`.
+      This was implemented for reproducibility purposes. Default: `master`.
+
+
+      ```bash
+
+      ## Download and use config file with following git commit id
+
+      --custom_config_version d52db660777c4bf36546ddb188ec530c3ada1b96
+
+      ```'
+    hidden: true
+  clipseq.custom_config_base:
+    description: Base directory for Institutional configs.
+    group: institutional_config_options
+    help: 'If you''re running offline, nextflow will not be able to fetch the institutional
+      config files from the internet. If you don''t need them, then this is not a
+      problem. If you do need them, you should download the files from the repo and
+      tell nextflow where to find them with the `custom_config_base` option. For example:
+
+
+      ```bash
+
+      ## Download and unzip the config files
+
+      cd /path/to/my/configs
+
+      wget https://github.com/nf-core/configs/archive/master.zip
+
+      unzip master.zip
+
+
+      ## Run the pipeline
+
+      cd /path/to/my/data
+
+      nextflow run /path/to/pipeline/ --custom_config_base /path/to/my/configs/configs-master/
+
+      ```
+
+
+      > Note that the nf-core/tools helper package has a `download` command to download
+      all required pipeline files + singularity containers + institutional configs
+      in one go for you, to make this process easier.'
+    hidden: true
+  clipseq.hostnames:
+    description: Institutional configs hostname.
+    group: institutional_config_options
+    help: ''
+    hidden: true
+  clipseq.config_profile_name:
+    description: Institutional config name.
+    group: institutional_config_options
+    help: ''
+    hidden: true
+  clipseq.config_profile_description:
+    description: Institutional config description.
+    group: institutional_config_options
+    help: ''
+    hidden: true
+  clipseq.config_profile_contact:
+    description: Institutional config contact information.
+    group: institutional_config_options
+    help: ''
+    hidden: true
+  clipseq.config_profile_url:
+    description: Institutional config URL link.
+    group: institutional_config_options
+    help: ''
+    hidden: true
+parameter_group:
+  input_output_options:
+    description: Define where the pipeline should find input data and save output
+      data.
+    help: null
+    title: Input/output options
+  reference_genome_options:
+    description: Options for the reference genome indices used to align reads.
+    help: null
+    title: Reference genome options
+  adapter_and_umi_options:
+    description: Define sequencing adapters and UMI options
+    help: null
+    title: Adapter and UMI options
+  peak_calling_options:
+    description: Define peak callers and peak calling options
+    help: null
+    title: Peak calling options
+  motif_finding:
+    description: Define motif finding parameters
+    help: null
+    title: Motif finding
+  generic_options:
+    description: Less common options for the pipeline, typically set in a config file.
+    help: 'These options are common to all nf-core pipelines and allow you to customise
+      some of the core preferences for how the pipeline runs.
+
+
+      Typically these options would be set in a Nextflow config file loaded for all
+      pipeline runs, such as `~/.nextflow/config`.'
+    title: Generic options
+  max_job_request_options:
+    description: Set the top limit for requested resources for any single job.
+    help: 'If you are running on a smaller system, a pipeline step requesting more
+      resources than are available may cause the Nextflow to stop the run with an
+      error. These options allow you to cap the maximum resources requested by any
+      single job so that the pipeline will run on your system.
+
+
+      Note that you can not _increase_ the resources requested by any job using these
+      options. For that you will need your own configuration file. See [the nf-core
+      website](https://nf-co.re/usage/configuration) for details.'
+    title: Max job request options
+  institutional_config_options:
+    description: Parameters used to describe centralised config profiles. These should
+      not be edited.
+    help: The centralised nf-core configuration profiles use a handful of pipeline
+      parameters to describe themselves. This information is then printed to the Nextflow
+      log when you run a pipeline. You should not need to change these values when
+      you run a pipeline.
+    title: Institutional config options
